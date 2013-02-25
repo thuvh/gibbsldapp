@@ -41,7 +41,7 @@ using namespace std;
 class model {
 public:
     // fixed options
-    string wordmapfile;		// file that contains word map [string -> integer id]
+    string wordmapfile;	// file that contains word map [string -> integer id]
     string trainlogfile;	// training log file
     string tassign_suffix;	// suffix for topic assignment file
     string theta_suffix;	// suffix for theta file
@@ -53,16 +53,16 @@ public:
     string dfile;		// data file    
     string model_name;		// model name
     int model_status;		// model status:
-				// MODEL_STATUS_UNKNOWN: unknown status
-				// MODEL_STATUS_EST: estimating from scratch
-				// MODEL_STATUS_ESTC: continue to estimate the model from a previous one
-				// MODEL_STATUS_INF: do inference
+    // MODEL_STATUS_UNKNOWN: unknown status
+    // MODEL_STATUS_EST: estimating from scratch
+    // MODEL_STATUS_ESTC: continue to estimate the model from a previous one
+    // MODEL_STATUS_INF: do inference
 
     dataset * ptrndata;	// pointer to training dataset object
     dataset * pnewdata; // pointer to new dataset object
 
     mapid2word id2word; // word map [int => string]
-    
+
     // --- model parameters and variables ---    
     int M; // dataset size (i.e., number of docs)
     int V; // vocabulary size
@@ -82,7 +82,7 @@ public:
     int * ndsum; // nasum[i]: total number of words in document i, size M
     double ** theta; // theta: document-topic distributions, size M x K
     double ** phi; // phi: topic-word distributions, size K x V
-    
+
     // for inference only
     int inf_liter;
     int newM;
@@ -95,25 +95,25 @@ public:
     double ** newtheta;
     double ** newphi;
     // --------------------------------------
-    
+
     model() {
-	set_default_values();
+        set_default_values();
     }
-          
+
     ~model();
-    
+
     // set default values for variables
-    void set_default_values();   
+    void set_default_values();
 
     // parse command line to get options
     int parse_args(int argc, char ** argv);
-    
+
     // initialize the model
     int init(int argc, char ** argv);
-    
+
     // load LDA model to continue estimating or to do inference
     int load_model(string model_name);
-    
+
     // save LDA model to files
     // model_name.tassign: topic assignments for words in docs
     // model_name.theta: document-topic distributions
@@ -125,7 +125,7 @@ public:
     int save_model_phi(string filename);
     int save_model_others(string filename);
     int save_model_twords(string filename);
-    
+
     // saving inference outputs
     int save_inf_model(string model_name);
     int save_inf_model_tassign(string filename);
@@ -133,17 +133,17 @@ public:
     int save_inf_model_newphi(string filename);
     int save_inf_model_others(string filename);
     int save_inf_model_twords(string filename);
-    
+
     // init for estimation
     int init_est();
     int init_estc();
-	
+
     // estimate LDA model using Gibbs sampling
     void estimate();
     int sampling(int m, int n);
     void compute_theta();
     void compute_phi();
-    
+
     // init for inference
     int init_inf();
     // inference for new (unseen) data based on the estimated LDA model

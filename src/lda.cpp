@@ -20,7 +20,7 @@
  * along with GibbsLDA++; if not, write to the Free Software Foundation,
  * Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
  */
-
+#include <cstdio>
 #include "model.h"
 
 using namespace std;
@@ -31,28 +31,32 @@ int main(int argc, char ** argv) {
     model lda;
 
     if (lda.init(argc, argv)) {
-	show_help();
-	return 1;
+        show_help();
+        return 1;
     }
-    
-    if (lda.model_status == MODEL_STATUS_EST || lda.model_status == MODEL_STATUS_ESTC) {
-	// parameter estimation
-	lda.estimate();
+
+    if (lda.model_status == MODEL_STATUS_EST
+            || lda.model_status == MODEL_STATUS_ESTC) {
+        // parameter estimation
+        lda.estimate();
     }
-    
+
     if (lda.model_status == MODEL_STATUS_INF) {
-	// do inference
-	lda.inference();
+        // do inference
+        lda.inference();
     }
-    
+
     return 0;
 }
 
 void show_help() {
     printf("Command line usage:\n");
-    printf("\tlda -est -alpha <double> -beta <double> -ntopics <int> -niters <int> -savestep <int> -twords <int> -dfile <string>\n");
-    printf("\tlda -estc -dir <string> -model <string> -niters <int> -savestep <int> -twords <int>\n");
-    printf("\tlda -inf -dir <string> -model <string> -niters <int> -twords <int> -dfile <string>\n");
+    printf(
+            "\tlda -est -alpha <double> -beta <double> -ntopics <int> -niters <int> -savestep <int> -twords <int> -dfile <string>\n");
+    printf(
+            "\tlda -estc -dir <string> -model <string> -niters <int> -savestep <int> -twords <int>\n");
+    printf(
+            "\tlda -inf -dir <string> -model <string> -niters <int> -twords <int> -dfile <string>\n");
     // printf("\tlda -inf -dir <string> -model <string> -niters <int> -twords <int> -dfile <string> -withrawdata\n");
 }
 

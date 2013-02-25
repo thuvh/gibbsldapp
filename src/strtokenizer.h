@@ -35,12 +35,12 @@ protected:
     int idx;
 
 public:
-    strtokenizer(string str, string seperators = " ");    
-    
+    strtokenizer(string str, string seperators = " ");
+
     void parse(string str, string seperators);
-    
+
     int count_tokens();
-    string next_token();   
+    string next_token();
     void start_scan();
 
     string token(int i);
